@@ -18,18 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/admin', function () {
         return view('admin.index');
     });
     Route::resource('task','App\Http\Controllers\TaskController');
 });
-
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,4 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Auth::routes();
+// Auth::routes(['register' => false]);
+
 require __DIR__.'/auth.php';
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

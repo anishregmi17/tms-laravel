@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\File;
 
 class TaskController extends Controller
 {
@@ -13,7 +14,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks= new Task;
-        $tasks= $tasks->all();
+        // $tasks= $tasks->all();
+             $tasks= $tasks->paginate(5);
         return view('admin.tasks.index', compact('tasks'));
     }
 
@@ -37,11 +39,13 @@ class TaskController extends Controller
             ]
             );
 
+
             $tasks= new  Task;
             $tasks->title=$request->title;
             $tasks->description=$request->description;
             $tasks->save();
 
+            notify()->success('Data is added successfully !!');
             return redirect()->route('task.index');
 
 
@@ -50,32 +54,52 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        //
+        $tasks = new Task;
+        $tasks = $tasks->where('id', $id)->first();
+        return view('admin.tasks.view', compact('tasks'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        //
+        $tasks = new Task;
+        $tasks = $tasks->where('id', $id)->first();
+
+        return view('admin.tasks.edit', compact('tasks'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $tasks = new Task;
+        $tasks = $tasks->where('id', $id)->first();
+        $tasks->title = $request->title;
+        $tasks->description = $request->description;
+        $tasks->update();
+
+        notify()->success('Data is updated successfully!');
+
+        return redirect()->route('task.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $tasks = new Task;
+        $tasks = $tasks->where('id', $id)->first();
+        $tasks->delete();
+        notify()->success('Data is deleted successfully!');
+        return redirect()->route('task.index');
     }
 }
+
+ 

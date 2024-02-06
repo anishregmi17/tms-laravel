@@ -57,20 +57,21 @@
 
     <section class="py-5">
         <div class="container">
-            <form class="row g-3 needs-validation" action="{{ route('task.store') }}" method="POST"
+            <form class="row g-3 needs-validation" action="{{ route('task.update', $tasks->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="col-md-6 mb-5">
-                    <label for="title" class="form-label">Title </label>
-                    <input type="text" class="form-control" name="title" id="title" value="">
+                    <label for="validationCustom01" class="form-label">Title </label>
+                    <input type="text" class="form-control" name="title" id="validationCustom01" value="{{$tasks->title}}">
                     <p class="text-danger"> @error('title')
                             {{ $message }}
                         @enderror
                     </p>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" >{{$tasks->description}}</textarea>
                     <p class="text-danger"> @error('description')
                         {{ $message }}
                     @enderror

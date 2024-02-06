@@ -10,7 +10,7 @@
 4. migrate: 
 // php artisan migrate
 
-define key length
+//define key length(not on this pc)
  add to app/providers/appserviceprovider
 
 5. Create folders and files
@@ -23,6 +23,8 @@ define key length
 					edit.blade.php
 					show.blade.php
 				index.blade.php
+
+<!-- http://127.0.0.1:8000/admin opens the index.blade.php outside file of admin -->
 
 6. Design the UI on created files
 7. Create route route
@@ -55,6 +57,31 @@ Clone project
 		: npm run build
 4. php artisan key:generate
 5. php artisan serve
+
+Default Auth Management:
+composer require laravel/ui
+ php artisan ui vue --auth
+ npm install OR npm update
+ npm run dev
+ npm run build
+
+Intermediate: 
+CRUD
+notification
+pagination
+Auth
+middleware
+file uploads
+
+
+In Advance:
+1. role management
+2. seeds
+3. Trash (softDelete)
+4. request
+
+5. Payment Integgration
+6. Create API
 
 
 
