@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
         return view('admin.index');
     });
     Route::resource('task','App\Http\Controllers\TaskController');
+    Route::resource('about-feature','App\Http\Controllers\AboutFeatureController');
 });
 
 Route::get('/dashboard', function () {

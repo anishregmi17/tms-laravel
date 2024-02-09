@@ -55,72 +55,69 @@
     </nav>
 
     <div class="table-responsive py-5">
-        <a class="btn btn-primary btn-sm " href="{{ route('task.create') }}" role="button">Add task </a>
+        <a class="btn btn-primary btn-sm " href="{{route('about-feature.create')}}" role="button">Add </a>
         @include('notify::components.notify')
-        <table class="table">
+        <table class="table datatable">
+            <div style="z-index: 1 !important;">
+              @include('notify::components.notify')
+            </div>
             <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
-                </tr>
+              <tr>
+                <th>#</th>
+                <th>Icon</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-                @foreach ($tasks as $task)
-                    <tr class="">
-                        <td scope="row">{{ $loop->iteration }}</td>
-                        <td>{{ $task->title }}</td>
-                        <td>{{ $task->description }}</td>
-                        <td>
-                            <a class="btn btn-primary btn-sm " href="{{ route('task.edit', $task->id) }}"
-                                role="button">Edit </a>
-                            <a class="btn btn-info btn-sm " href="{{ route('task.show', $task->id) }}"
-                                role="button">show </a>
-
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Delete
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog        ">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Do you want to delete this data???
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancle</button>
-                                            <form action="{{ route('task.destroy', $task->id) }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger">Delete </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-
+              @foreach ($aboutFeatures as $aboutFeature)
+                
+           
+              <tr>
+                <td>{{$loop->iteration}}</td>
+                <td><img src="{{asset('uploads/'.$aboutFeature->icon)}}" alt="" width="100" height="100"></td>
+                <td>{{$aboutFeature->title}}</td>
+                <td>{{$aboutFeature->description}}</td>
+                <td>
+                  <a class="btn btn-outline-primary btn-sm text-dark" href="{{route('about-feature.edit', $aboutFeature->id)}}" role="button">Edit </a>
+                  <a class="btn btn-outline-info btn-sm " href="{{route('about-feature.show', $aboutFeature->id)}}" role="button">View </a>
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-sm btn-outline-danger text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                 Delete
+                 </button>
+                 
+                 <!-- Modal -->
+                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog        ">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Do you want to delete this data??
+                      </div>
+                      <div class="modal-footer">
+                        <form action="{{route('about-feature.destroy', $aboutFeature->id)}}"  method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('delete')
+                          <button type="submit"  class="btn btn-outline-primary text-dark ">Save</button>
+                        </form>
+                        <button type="button" class="btn btn-outline-secondary text-dark" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                 </div>
+                </td>
+              </tr>
+              @endforeach
             </tbody>
-        </table>
+          </table>
 
         {{-- for the pagination --}}
-        <div class="w-25 mx-auto">
-            {{ $tasks->links() }}
-        </div>
+        <div>
+            {{$aboutFeatures->links()}}
+          </div>
     </div>
 
 

@@ -15,7 +15,10 @@ class TaskController extends Controller
     {
         $tasks= new Task;
         // $tasks= $tasks->all();
-             $tasks= $tasks->paginate(5);
+        // for pagination
+
+        $tasks= $tasks->paginate(5);
+        
         return view('admin.tasks.index', compact('tasks'));
     }
 
